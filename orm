@@ -14,9 +14,9 @@ def cheapest_dish() -> models.Dish:
 
     Query the database to retrieve the cheapest dish available
     """
-    query=Dish.select().where(Dish.price_in_cents==2.50)
+   query=Dish.select(fn.MIN(Dish.price_in_cents)).scalar()
     for Dish in query:
-        print(Dish.name, Dish.price_in_cents==2.50)
+        print(Dish.name, Dish.price_in_cents)
 
 def vegetarian_dishes() -> List[models.Dish]:
     """You'd like to know what vegetarian dishes are available
